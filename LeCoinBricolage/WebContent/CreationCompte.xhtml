@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>Création d'un compte</title>
+</h:head>
+<body>
+	<h:form>
+		<p:panel id="panel" header="Formulaire d'inscription"
+			style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+			
+				<p:inputText id="userId"  value="#{gestionCompte.id_client}" type="hidden" />
+                <p:inputText type="hidden" />
+                
+				<p:outputLabel value="Nom:" />
+				<p:inputText id="userNom" required="true" value="#{gestionCompte.cl_nom}" />
+
+				<p:outputLabel value="Prénom:" />
+				<p:inputText id="userPrenom" required="true" value="#{gestionCompte.cl_prenom}" />
+
+				<p:outputLabel value="Numéro de téléphone:" />
+				<p:inputText id="userTel" required="false" value="#{gestionCompte.cl_tel}" />
+
+				<p:outputLabel value="E-mail:" />
+				<p:inputText id="userMail" required="true" value="#{gestionCompte.cl_mail}" />
+
+				<p:outputLabel value="Mot de passe:" />
+				<p:password id="userPass" required="true" value="#{gestionCompte.cl_password}" />
+
+				<p:outputLabel value="Voie:" />
+				<p:inputText id="userVoie" required="true" value="#{gestionCompte.cl_voie}" />
+
+				<p:outputLabel value="Code postal:" />
+				<p:inputText id="userCode" required="true" value="#{gestionCompte.cl_code_postal}" />
+
+				<p:outputLabel value="Ville:" />
+				<p:inputText id="userVille" required="true" value="#{gestionCompte.cl_ville}" />
+				
+				<p:commandButton id="submit" value="S'inscrire" action="#{gestionCompte.addClient}" />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</body>
+</html>

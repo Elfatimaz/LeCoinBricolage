@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>La liste des comptes</title>
+</h:head>
+<body>
+	<h:form>
+		<h:dataTable border="0" rules="all" value="#{gestionCompte.client}"
+			var="c">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:outputText value="#{c.id_client}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Prénom" />
+				</f:facet>
+				<h:outputText value="#{c.cl_prenom}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Nom" />
+				</f:facet>
+				<h:outputText value="#{c.cl_nom}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Téléphone" />
+				</f:facet>
+				<h:outputText value="#{c.cl_tel}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="E-mail" />
+				</f:facet>
+				<h:outputText value="#{c.cl_mail}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Voie" />
+				</f:facet>
+				<h:outputText value="#{c.cl_voie}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Code postal" />
+				</f:facet>
+				<h:outputText value="#{c.cl_code_postal}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Ville" />
+				</f:facet>
+				<h:outputText value="#{c.cl_ville}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Opérations" />
+				</f:facet>
+				<h:commandButton value="Modifier"
+					action="#{gestionCompte.editCompte(c)}" />
+				<h:commandButton value="Supprimer"
+					action="#{gestionCompte.deleteCompte(c)}" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</body>
+</html>
