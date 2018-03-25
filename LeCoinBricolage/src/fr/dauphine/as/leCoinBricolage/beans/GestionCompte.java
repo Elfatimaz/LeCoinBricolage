@@ -29,6 +29,7 @@ public class GestionCompte implements Serializable {
 	private final static String _SQL_UPDATE_COMPTE = "UPDATE coinbrico.client SET CL_MAIL=?,"
 			+ "CL_PASSWORD=?,CL_VOIE=?,CL_CODE_POSTAL=?,CL_VILLE=? where ID_CLIENT=?";
 	private final static String _SQL_DELETE_COMPTE = "DELETE from coinbrico.client where ID_CLIENT=?";
+	private final static String _SQL_SEARCH_COMPTE = "select CL_NOM from coinbrico.client where CL_MAIL=? and CL_PASSWORD=?";
 
 	private List<Compte> client;
 	private Compte compte = null;
@@ -78,15 +79,18 @@ public class GestionCompte implements Serializable {
 		this.compte = c;
 		return "edit";
 	}
-
-	public String deleteCompte(Compte c){
+    
+	public String inscripClient() {
+		return "inscription";
+	}
+	
+	public String deleteCompte(){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int resultSet;
 		try {
 			connection = getDataSource().getConnection();
 			preparedStatement = connection.prepareStatement(_SQL_DELETE_COMPTE);
-			preparedStatement.setInt(1, c.getId_client());
 			resultSet = preparedStatement.executeUpdate();
 		}
 		catch (Exception e) {
@@ -102,6 +106,33 @@ public class GestionCompte implements Serializable {
 		return "list";
 
 
+	}
+	
+	public String loginClient(Compte c){
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet= null;
+		try {
+			connection = getDataSource().getConnection();
+			preparedStatement = connection.prepareStatement(_SQL_SEARCH_COMPTE);
+			preparedStatement.setString(1, this.getCl_mail());
+			preparedStatement.setString(2, this.getCl_password());
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet == null){
+		
+			}
+         }
+		catch (Exception e) {
+			System.err.println(e.getMessage().toString());
+		} finally {
+			try {
+				preparedStatement.close();
+				connection.close();
+			} catch (Exception e2) {
+				System.err.println(e2.getMessage().toString());
+			}
+		}
+		return "list";
 	}
 
 	public String updateCompte(){

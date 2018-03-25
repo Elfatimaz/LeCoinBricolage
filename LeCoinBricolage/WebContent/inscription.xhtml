@@ -78,13 +78,25 @@
 						<div class="bg-faded rounded p-5">
 
 							<h:form>
-								<p:panel id="panel" header="Connectez-vous"
+								<p:panel id="panel" header="Formulaire d'inscription"
 									style="margin-bottom:10px;">
 									<h:panelGrid columns="2" cellpadding="5">
 
 										<p:inputText id="userId" value="#{gestionCompte.id_client}"
 											type="hidden" />
 										<p:inputText type="hidden" />
+
+										<p:outputLabel value="Nom:" />
+										<p:inputText id="userNom" required="true"
+											value="#{gestionCompte.cl_nom}" />
+
+										<p:outputLabel value="Prénom:" />
+										<p:inputText id="userPrenom" required="true"
+											value="#{gestionCompte.cl_prenom}" />
+
+										<p:outputLabel value="Numéro de téléphone:" />
+										<p:inputText id="userTel" required="false"
+											value="#{gestionCompte.cl_tel}" />
 
 										<p:outputLabel value="E-mail:" />
 										<p:inputText id="userMail" required="true"
@@ -94,11 +106,20 @@
 										<p:password id="userPass" required="true"
 											value="#{gestionCompte.cl_password}" />
 
-										<p:commandButton id="submit" value="Se connecter"
-											action="#{gestionCompte.loginClient}" />
-											
-										<p:commandButton id="submit2" value="S'inscrire"
-											action="#{gestionCompte.inscripClient}" />
+										<p:outputLabel value="Voie:" />
+										<p:inputText id="userVoie" required="true"
+											value="#{gestionCompte.cl_voie}" />
+
+										<p:outputLabel value="Code postal:" />
+										<p:inputText id="userCode" required="true"
+											value="#{gestionCompte.cl_code_postal}" />
+
+										<p:outputLabel value="Ville:" />
+										<p:inputText id="userVille" required="true"
+											value="#{gestionCompte.cl_ville}" />
+
+										<p:commandButton id="submit" value="S'inscrire"
+											action="#{gestionCompte.addClient}" />
 
 									</h:panelGrid>
 								</p:panel>
