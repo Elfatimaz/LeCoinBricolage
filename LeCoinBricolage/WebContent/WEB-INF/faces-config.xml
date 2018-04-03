@@ -6,8 +6,17 @@
     <navigation-rule>
 		<from-view-id>/CreationProduit.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>list</from-outcome>
+			<from-outcome>listp</from-outcome>
 			<to-view-id>/ListProduits.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>listo</from-outcome>
+			<to-view-id>/ListObjets.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -21,14 +30,6 @@
 		</navigation-case>
 	</navigation-rule>
 	
-	<navigation-rule>
-		<from-view-id>/CreationCompte.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>list</from-outcome>
-			<to-view-id>/ListComptes.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
@@ -47,10 +48,20 @@
 	</navigation-rule>
 
     	<navigation-rule>
-		<from-view-id>/profile.xhtml</from-view-id>
+		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>edit</from-outcome>
 			<to-view-id>/ModifCompte.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	
+			<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>list</from-outcome>
+			<to-view-id>/ListComptes.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

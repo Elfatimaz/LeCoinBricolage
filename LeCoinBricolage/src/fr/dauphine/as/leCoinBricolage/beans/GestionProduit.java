@@ -178,7 +178,7 @@ public class GestionProduit implements Serializable {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "list";
+		return "listp";
 
 	}
 

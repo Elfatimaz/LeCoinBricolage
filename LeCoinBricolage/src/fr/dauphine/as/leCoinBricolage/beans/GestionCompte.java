@@ -19,7 +19,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import fr.dauphine.as.leCoinBricolage.util.SessionUtils;
 
 @ManagedBean
 @SessionScoped
@@ -78,9 +81,9 @@ public class GestionCompte implements Serializable {
 	}
 
 
-	public String editCompte() {
+	public String editCompte(Compte c) {
 		
-	    System.out.print("mail");
+	    this.compte = c;
     	return "edit";
 	}
     
@@ -94,7 +97,7 @@ public class GestionCompte implements Serializable {
 	 
 	  }
 	
-	public String deleteCompte(){
+	public String deleteCompte(String mailD){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int resultSet;
@@ -114,7 +117,7 @@ public class GestionCompte implements Serializable {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "accueil";
+		return "list";
 
 
 	}

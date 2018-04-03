@@ -23,65 +23,17 @@ import javax.sql.DataSource;
 public class GestionObjet implements Serializable {
 	static final long serialVersionUID = 1L;
 	private static DataSource dataSource = null;
-	private final static String _SQL_SELECT_PRODUIT= "select * from coinbrico.produit";
-	private final static String _SQL_INSERT_PRODUIT = "INSERT INTO coinbrico.produit (P_LIBELLE,P_TYPE,P_DESC_TECHNIQUE,P_DEFAUT,P_DATE_DER_MAJ,P_PRIX,P_AMENDE_DJ,P_CAUTION)"
-			+ " VALUES(?,?,?,?,?,?,?,?)";
-	private final static String _SQL_UPDATE_PRODUIT = "UPDATE coinbrico.produit SET P_LIBELLE=?,"
-			+ "P_TYPE=?,P_DESC_TECHNIQUE=?,P_DEFAUT=?,P_PRIX=?,P_AMENDE=?,P_CAUTION=? where ID_PRODUIT=?";
-	private final static String _SQL_DELETE_PRODUIT = "DELETE from coinbrico.PRODUIT where ID_PRODUIT=?";
-	
+
+	private final static String _SQL_INSERT_RESA = "INSERT INTO coinbrico.reservation (ID_RESA,ID_OBJET,ID_CLIENT) VALUES(?,?,?)";
+	private final static String _SQL_UPDATE_OBJET = "UPDATE coinbrico.objet SET o_etat=? where id_objet = ?";
 	private final static String _SQL_SELECT_OBJETS ="select * from coinbrico.objet where id_produit=?";
 
 	private List<Objet> objet;
 	private Objet o = null;
 	static Produit p;
 
-	/*public ArrayList<Produit> getProduit() {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		Produit p= null;
-		ArrayList<Produit> resultat = null;
-		try {
-			resultat = new ArrayList<Produit>();
-			connection = getDataSource().getConnection();
-			preparedStatement = connection
-					.prepareStatement(_SQL_SELECT_PRODUIT);
-			resultSet = preparedStatement.executeQuery();
-
-			while (resultSet.next()) {
-				p = new Produit();
-				p.setId_produit(new Integer(resultSet.getString(1)).intValue());
-				p.setP_libelle(resultSet.getString(2));
-				p.setP_type(resultSet.getString(3));
-				p.setP_desc(resultSet.getString(4));
-				p.setP_defaut(resultSet.getString(5));
-				p.setP_prix(Float.parseFloat(resultSet.getString(8)));
-				p.setP_amende(Float.parseFloat(resultSet.getString(9)));
-				p.setP_caution(Float.parseFloat(resultSet.getString(10)));
-				resultat.add(p);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage().toString());
-		} finally {
-			try {
-				resultSet.close();
-				preparedStatement.close();
-				connection.close();
-			} catch (Exception e2) {
-				System.err.println(e2.getMessage().toString());
-			}
-		}
-		return resultat;
-	}
-
-
-	public String editProduit(Produit p) {
-		this.prod = p;
-		return "edit";
-	}*/
 	
-	public String listeObjets() {
+	public ArrayList<Objet> listeObjets() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -117,18 +69,19 @@ public class GestionObjet implements Serializable {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "objProd";
+		return resultat;
 	}
 
-	/*
-	public String deleteProduit(Produit p){
+	
+	public String updateObjet(Objet o){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int resultSet;
 		try {
 			connection = getDataSource().getConnection();
-			preparedStatement = connection.prepareStatement(_SQL_DELETE_PRODUIT);
-			preparedStatement.setInt(1, p.getId_produit());
+			preparedStatement = connection.prepareStatement(_SQL_UPDATE_OBJET);
+			preparedStatement.setString(1, "reserve");
+			preparedStatement.setString(2,o.getId_objet());
 			resultSet = preparedStatement.executeUpdate();
 		}
 		catch (Exception e) {
@@ -141,63 +94,25 @@ public class GestionObjet implements Serializable {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "list";
-
-
-	}
-
-	public String updateProduit(){
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		int resultSet;
-		try {
-			connection = getDataSource().getConnection();
-			preparedStatement = connection.prepareStatement(_SQL_UPDATE_PRODUIT);
-			preparedStatement.setString(1, this.getP_libelle());
-			preparedStatement.setString(2, this.getP_type());
-			preparedStatement.setString(3, this.getP_desc());
-			preparedStatement.setString(4, this.getP_defaut());
-			preparedStatement.setFloat(5, this.getP_prix());
-			preparedStatement.setFloat(6, this.getP_amende());
-			preparedStatement.setFloat(7, this.getP_caution());
-			preparedStatement.setString(10, this.getStringP_Date());
-			preparedStatement.setInt(9, this.getP_u_der_maj());
-			resultSet = preparedStatement.executeUpdate();
-		}
-		catch (Exception e) {
-			System.err.println(e.getMessage().toString());
-		} finally {
-			try {
-				preparedStatement.close();
-				connection.close();
-			} catch (Exception e2) {
-				System.err.println(e2.getMessage().toString());
-			}
-		}
-		return "list";
+		return "listo";
 	}
 
 
 
 
-	public String addProduit() {
+	public String reserver(Objet o) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int resultSet;
 		try {
+			updateObjet(o);
 			connection = getDataSource().getConnection();
 			preparedStatement = connection
-					.prepareStatement(_SQL_INSERT_PRODUIT);
+					.prepareStatement(_SQL_INSERT_RESA);
 			
-			preparedStatement.setString(1, this.getP_libelle());
-			preparedStatement.setString(2, this.getP_type());
-			preparedStatement.setString(3, this.getP_desc());
-			preparedStatement.setString(4, this.getP_defaut());
-			preparedStatement.setDate(5, getCurrentDate());
-			//preparedStatement.setInt(6, this.getP_u_der_maj());
-			preparedStatement.setFloat(6, this.getP_prix());
-			preparedStatement.setFloat(7, this.getP_amende());
-			preparedStatement.setFloat(8, this.getP_caution());
+			preparedStatement.setInt(1, 1);
+			preparedStatement.setString(2, o.getId_objet());
+			preparedStatement.setInt(3, 3);
 			
 			resultSet = preparedStatement.executeUpdate();
 		}
@@ -211,9 +126,9 @@ public class GestionObjet implements Serializable {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "list";
+		return "listo";
 
-	}*/
+	}
 
 
 	public Objet getO() {

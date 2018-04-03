@@ -69,7 +69,7 @@
 				<h:commandButton value="Modifier"
 					action="#{gestionCompte.editCompte(c)}" />
 				<h:commandButton value="Supprimer"
-					action="#{gestionCompte.deleteCompte(c)}" />
+					action="#{gestionCompte.deleteCompte(c.cl_mail)}" />
 			</h:column>
 
 		</h:dataTable>

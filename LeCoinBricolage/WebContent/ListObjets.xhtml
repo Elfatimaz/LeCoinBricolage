@@ -2,15 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
 	<h:outputStylesheet library="css" name="default.css" />
-	<title>La liste des ibjets</title>
+	<title>La liste des objets</title>
 </h:head>
 <body>
 	<h:form>
-		<h:dataTable border="0" rules="all" value="#{gestionObjet.listObjets()}"
+		<h:dataTable border="0" rules="all" value="#{gestionObjet.listeObjets()}"
 			var="o">
 			<h:column>
 				<f:facet name="header">
@@ -46,7 +47,7 @@
 				<f:facet name="header">
 					<h:outputText value="Amende" />
 				</f:facet>
-				<h:outputText value="#{o.o_amende}" />
+				<h:outputText value="#{o.o_amende_dj}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
@@ -58,9 +59,10 @@
 			
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Voir les objets associés" />
+					<h:outputText value="Réserver" />
 				</f:facet>
-				
+				<h:commandButton value="Réserver"
+					action="#{gestionObjet.reserver(o)}" />
 			</h:column>
 
 		</h:dataTable>

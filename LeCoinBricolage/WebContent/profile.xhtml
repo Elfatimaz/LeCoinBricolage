@@ -56,7 +56,7 @@
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase text-expanded" href="#">Produits</a>
+						class="nav-link text-uppercase text-expanded" href="ListProduits.xhtml">Produits</a>
 					</li>
 					<li class="nav-item px-lg-4"><a
 						class="nav-link text-uppercase text-expanded" href="#">Recherche</a>
@@ -80,6 +80,8 @@
 							     
 										<p:commandButton value="Modifier le profil"
 											action="#{gestionCompte.editCompte()}" />
+										<p:commandButton value="Modifier le compte"
+											onclick="location.href='ModifCompte.xhtml';"/> 
      									<br />
 										<p:commandButton value="Supprimer le profil"
 											action="#{gestionCompte.deleteCompte()}" actionListener="#{gestionCompte.attrListener}">

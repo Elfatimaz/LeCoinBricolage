@@ -69,10 +69,8 @@ public class Login implements Serializable {
 		if (resultSet.next()) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", user);
-			System.out.print("hi");
 			return "profile";
 		} else {
-			System.out.print("hola");
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
