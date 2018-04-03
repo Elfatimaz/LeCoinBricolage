@@ -52,7 +52,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase text-expanded" href="index.html">Accueil
+						class="nav-link text-uppercase text-expanded" href="accueil.xhtml">Accueil
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item px-lg-4"><a
@@ -87,15 +87,15 @@
 										<p:inputText type="hidden" />
 
 										<p:outputLabel value="E-mail:" />
-										<p:inputText id="userMail" required="true"
-											value="#{gestionCompte.cl_mail}" />
+										<p:inputText id="userMail" 
+											value="#{login.user}" />
 
 										<p:outputLabel value="Mot de passe:" />
-										<p:password id="userPass" required="true"
-											value="#{gestionCompte.cl_password}" />
+										<p:password id="userPass" 
+											value="#{login.pwd}" />
 
 										<p:commandButton id="submit" value="Se connecter"
-											action="#{gestionCompte.loginClient}" />
+											action="#{login.validateUsernamePassword()}" />
 											
 										<p:commandButton id="submit2" value="S'inscrire"
 											action="#{gestionCompte.inscripClient}" />

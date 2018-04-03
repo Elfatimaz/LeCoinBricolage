@@ -14,7 +14,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 
-	<title>LeCoinBrico - Login</title>
+	<title>LeCoinBrico - Profile</title>
 
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -52,18 +52,18 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item px-lg-4"><a
-						class="nav-link text-uppercase text-expanded" href="accueil.xhtml">Accueil
+						class="nav-link text-uppercase text-expanded" href="accueil.html">Accueil
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active px-lg-4"><a
+					<li class="nav-item px-lg-4"><a
 						class="nav-link text-uppercase text-expanded" href="#">Produits</a>
 					</li>
 					<li class="nav-item px-lg-4"><a
 						class="nav-link text-uppercase text-expanded" href="#">Recherche</a>
 					</li>
-					<li class="nav-item  px-lg-4"><a
-						class="nav-link text-uppercase text-expanded" href="#">Se
-							connecter</a></li>
+					<li class="nav-item active px-lg-4"><a
+						class="nav-link text-uppercase text-expanded" href="#">Mon
+							profil</a></li>
 				</ul>
 			</div>
 		</div>
@@ -76,41 +76,18 @@
 				<div class="row">
 					<div class="col-xl-9 col-lg-10 mx-auto">
 						<div class="bg-faded rounded p-5">
+							<h1>Bienvenu #{login.user} !</h1>
+							     
+										<p:commandButton value="Modifier le profil"
+											action="#{gestionCompte.editCompte()}" />
+     									<br />
+										<p:commandButton value="Supprimer le profil"
+											action="#{gestionCompte.deleteCompte()}" actionListener="#{gestionCompte.attrListener}">
+											<f:attribute name="mail" value="{login.user}" />
+										</p:commandButton>
+										<br/>
+										<p:commandButton value="Visualiser vos réservations" />
 
-								<h:form>
-		<p:panel id="panel" header="Formulaire Fiche Produit"
-			style="margin-bottom:10px;">
-			<h:panelGrid columns="2" cellpadding="5">
-			
-				<p:inputText id="Id_produit"  value="#{gestionProduit.id_produit}" type="hidden" />
-                <p:inputText type="hidden" />
-                
-				<p:outputLabel value="Type de produit:" />
-				<p:inputText id="p_type" required="true" value="#{gestionProduit.p_type}" />
-				
-				<p:outputLabel value="Libellé:" />
-				<p:inputText id="p_libelle" required="true" value="#{gestionProduit.p_libelle}" />
-
-				<p:outputLabel value="Description:" />
-				<p:inputText id="p_desc" required="true" value="#{gestionProduit.p_desc}" />
-
-				<p:outputLabel value="Défauts connus:" />
-				<p:inputText id="p_defaut" required="false" value="#{gestionProduit.p_defaut}" />
-
-				<p:outputLabel value="Prix Journalier:" />
-				<p:inputText id="prix" required="true" value="#{gestionProduit.p_prix}" />
-
-				<p:outputLabel value="Caution:" />
-				<p:inputText id="caution" required="true" value="#{gestionProduit.p_caution}" />
-				
-				<p:outputLabel value="Amende journalière:" />
-				<p:inputText id="amende" required="true" value="#{gestionProduit.p_amende}" />
-				
-				<p:commandButton id="submit" value="Créer un nouveau produit" action="#{gestionProduit.addProduit}" />
-
-			</h:panelGrid>
-		</p:panel>
-	</h:form>
 						</div>
 					</div>
 				</div>

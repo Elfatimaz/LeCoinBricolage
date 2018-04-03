@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>La liste des comptes</title>
+</h:head>
+<body>
+	<h:form>
+		<h:dataTable border="0" rules="all" value="#{gestionProduit.produit}"
+			var="p">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:outputText value="#{p.id_produit}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Libellé du produit" />
+				</f:facet>
+				<h:outputText value="#{p.p_libelle}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Type du produit" />
+				</f:facet>
+				<h:outputText value="#{p.p_type}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Description du produit" />
+				</f:facet>
+				<h:outputText value="#{p.p_desc}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Défauts" />
+				</f:facet>
+				<h:outputText value="#{p.p_defaut}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Prix" />
+				</f:facet>
+				<h:outputText value="#{p.p_prix}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Amende" />
+				</f:facet>
+				<h:outputText value="#{p.p_amende}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Caution" />
+				</f:facet>
+				<h:outputText value="#{p.p_caution}"/>
+			</h:column>
+			
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Voir les objets associés" />
+				</f:facet>
+				<h:commandButton value="Consulter"
+					action="#{gestionProduit.listObjets(p)}" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</body>
+</html>

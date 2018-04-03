@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:#ListComptes.xhtml" PATH="/ListComptes.xhtml"
-  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#ListComptes.xhtml:0" NAME="item"
-   PATH="/ListComptes.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="edit::#ModifCompte.xhtml" NAME="output"
-    PATH="/ModifCompte.xhtml" TARGET="rules:#ModifCompte.xhtml"
-    TITLE="edit" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#ModifCompte.xhtml" PATH="/ModifCompte.xhtml"
-  SHAPE="240,145,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#ModifCompte.xhtml:0" NAME="item"
-   PATH="/ModifCompte.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="list::#ListComptes.xhtml" NAME="output"
-    PATH="/ListComptes.xhtml" TARGET="rules:#ListComptes.xhtml"
-    TITLE="list" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
+  SHAPE="240,145,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#CreationCompte.xhtml"
   PATH="/CreationCompte.xhtml" SHAPE="48,241,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#CreationCompte.xhtml:0" NAME="item"
@@ -37,5 +23,39 @@
     NAME="output" PATH="/inscription.xhtml"
     TARGET="rules:#inscription.xhtml" TITLE="inscription" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#login.xhtml:1" NAME="item1"
+   PATH="/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="profile::#profile.xhtml" NAME="output"
+    PATH="/profile.xhtml" TARGET="rules:#profile.xhtml" TITLE="profile" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#profile.xhtml" PATH="/profile.xhtml"
+  SHAPE="256,513,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#profile.xhtml:0" NAME="item"
+   PATH="/profile.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="edit::#ModifCompte.xhtml" NAME="output"
+    PATH="/ModifCompte.xhtml" TARGET="rules:#ModifCompte.xhtml"
+    TITLE="edit" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#CreationProduit.xhtml"
+  PATH="/CreationProduit.xhtml" SHAPE="32,609,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#CreationProduit.xhtml:0" NAME="item"
+   PATH="/CreationProduit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="list::#ListProduits.xhtml" NAME="output"
+    PATH="/ListProduits.xhtml" TARGET="rules:#ListProduits.xhtml"
+    TITLE="list" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ListProduits.xhtml"
+  PATH="/ListProduits.xhtml" SHAPE="240,625,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ListProduits.xhtml:0" NAME="item"
+   PATH="/ListProduits.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="obj::#ListObjets.xhtml" NAME="output"
+    PATH="/ListObjets.xhtml" TARGET="rules:#ListObjets.xhtml"
+    TITLE="obj" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ListObjets.xhtml" PATH="/ListObjets.xhtml"
+  SHAPE="448,609,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

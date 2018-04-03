@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
- <navigation-rule>
-  <from-view-id>/ListComptes.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>edit</from-outcome>
-   <to-view-id>/ModifCompte.xhtml</to-view-id>
-   <redirect/>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/ModifCompte.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>list</from-outcome>
-   <to-view-id>/ListComptes.xhtml</to-view-id>
-   <redirect/>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-  <from-view-id>/CreationCompte.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>list</from-outcome>
-   <to-view-id>/ListComptes.xhtml</to-view-id>
-   <redirect/>
-  </navigation-case>
- </navigation-rule>
- <navigation-rule>
-    <from-view-id>/login.xhtml</from-view-id>
-   <navigation-case>
-   <from-outcome>inscription</from-outcome>
-   <to-view-id>/inscription.xhtml</to-view-id>
-   <redirect/>
-  </navigation-case>
- </navigation-rule>
- <application/>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <navigation-rule>
+		<from-view-id>/CreationProduit.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>list</from-outcome>
+			<to-view-id>/ListProduits.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+    <navigation-rule>
+		<from-view-id>/ListProduits.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>obj</from-outcome>
+			<to-view-id>/ListObjets.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/CreationCompte.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>list</from-outcome>
+			<to-view-id>/ListComptes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>inscription</from-outcome>
+			<to-view-id>/inscription.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>profile</from-outcome>
+			<to-view-id>/profile.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+    	<navigation-rule>
+		<from-view-id>/profile.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>edit</from-outcome>
+			<to-view-id>/ModifCompte.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<application />
 </faces-config>

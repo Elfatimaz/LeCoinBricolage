@@ -8,9 +8,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,9 +31,9 @@ public class GestionCompte implements Serializable {
 			+ "CL_PASSWORD,CL_VOIE,CL_CODE_POSTAL,CL_VILLE) VALUES(?,?,?,?,?,?,?,?,?)";
 	private final static String _SQL_UPDATE_COMPTE = "UPDATE coinbrico.client SET CL_MAIL=?,"
 			+ "CL_PASSWORD=?,CL_VOIE=?,CL_CODE_POSTAL=?,CL_VILLE=? where ID_CLIENT=?";
-	private final static String _SQL_DELETE_COMPTE = "DELETE from coinbrico.client where ID_CLIENT=?";
-	private final static String _SQL_SEARCH_COMPTE = "select CL_NOM from coinbrico.client where CL_MAIL=? and CL_PASSWORD=?";
-
+	private final static String _SQL_DELETE_COMPTE = "DELETE from coinbrico.client where CL_MAIL=?";
+	private final static String _SQL_SEARCH_COMPTE = "select * from coinbrico.client where CL_MAIL=?";
+    private String mailD;
 	private List<Compte> client;
 	private Compte compte = null;
 
@@ -75,14 +78,21 @@ public class GestionCompte implements Serializable {
 	}
 
 
-	public String editCompte(Compte c) {
-		this.compte = c;
-		return "edit";
+	public String editCompte() {
+		
+	    System.out.print("mail");
+    	return "edit";
 	}
     
 	public String inscripClient() {
 		return "inscription";
 	}
+	
+	public void attrListener(ActionEvent event){
+		 
+		mailD = (String)event.getComponent().getAttributes().get("mail");
+	 
+	  }
 	
 	public String deleteCompte(){
 		Connection connection = null;
@@ -91,6 +101,7 @@ public class GestionCompte implements Serializable {
 		try {
 			connection = getDataSource().getConnection();
 			preparedStatement = connection.prepareStatement(_SQL_DELETE_COMPTE);
+			preparedStatement.setString(1, mailD);
 			resultSet = preparedStatement.executeUpdate();
 		}
 		catch (Exception e) {
@@ -103,39 +114,82 @@ public class GestionCompte implements Serializable {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "list";
+		return "accueil";
 
 
 	}
 	
-	public String loginClient(Compte c){
+/*//	public String loginClient(Compte c){
+//		Connection connection = null;
+//		PreparedStatement preparedStatement = null;
+//		ResultSet resultSet= null;
+//		try {
+//			connection = getDataSource().getConnection();
+//			preparedStatement = connection.prepareStatement(_SQL_SEARCH_COMPTE);
+//			preparedStatement.setString(1, this.getCl_mail());
+//			preparedStatement.setString(2, this.getCl_password());
+//			resultSet = preparedStatement.executeQuery();
+//			if(resultSet == null){
+//		
+//			}
+//         }
+//		catch (Exception e) {
+//			System.err.println(e.getMessage().toString());
+//		} finally {
+//			try {
+//				preparedStatement.close();
+//				connection.close();
+//			} catch (Exception e2) {
+//				System.err.println(e2.getMessage().toString());
+//			}
+//		}
+//		return "list";
+//	}
+*/
+	public Compte searchForCompte(String mail)
+	{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet= null;
+		ResultSet resultSet = null;
+		Compte c= null;
+		ArrayList<Compte> resultat = null;
 		try {
+			resultat = new ArrayList<Compte>();
 			connection = getDataSource().getConnection();
-			preparedStatement = connection.prepareStatement(_SQL_SEARCH_COMPTE);
-			preparedStatement.setString(1, this.getCl_mail());
-			preparedStatement.setString(2, this.getCl_password());
+			preparedStatement = connection
+					.prepareStatement(_SQL_SEARCH_COMPTE);
+			preparedStatement.setString(1, mail);
 			resultSet = preparedStatement.executeQuery();
-			if(resultSet == null){
-		
+
+			while (resultSet.next()) {
+				c = new Compte();
+				c.setId_client(new Integer(resultSet.getString(1)).intValue());
+				c.setCl_nom(resultSet.getString(2));
+				c.setCl_prenom(resultSet.getString(3));
+				c.setCl_tel(resultSet.getString(5));
+				c.setCl_mail(resultSet.getString(6));
+				c.setCl_password(resultSet.getString(7));
+				c.setCl_voie(resultSet.getString(9));
+				c.setCl_code_postal(resultSet.getString(10));
+				c.setCl_ville(resultSet.getString(11));
+				resultat.add(c);
 			}
-         }
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage().toString());
 		} finally {
 			try {
+				resultSet.close();
 				preparedStatement.close();
 				connection.close();
 			} catch (Exception e2) {
 				System.err.println(e2.getMessage().toString());
 			}
 		}
-		return "list";
+		return c;
 	}
-
+	
 	public String updateCompte(){
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int resultSet;

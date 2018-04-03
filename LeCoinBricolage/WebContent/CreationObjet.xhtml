@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>Création d'une Fiche Produit</title>
+</h:head>
+<body>
+	<h:form>
+		<p:panel id="panel" header="Formulaire Fiche Produit"
+			style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+			
+				<p:inputText id="Id_produit"  value="#{gestionProduit.id_produit}" type="hidden" />
+                <p:inputText type="hidden" />
+                
+				<p:outputLabel value="Type de produit:" />
+				<p:inputText id="p_type" required="true" value="#{gestionProduit.p_type}" />
+				
+				<p:outputLabel value="Libellé:" />
+				<p:inputText id="p_libelle" required="true" value="#{gestionProduit.p_libelle}" />
+
+				<p:outputLabel value="Description:" />
+				<p:inputText id="p_desc" required="true" value="#{gestionProduit.p_desc}" />
+
+				<p:outputLabel value="Défauts connus:" />
+				<p:inputText id="p_defaut" required="false" value="#{gestionProduit.p_defaut}" />
+
+				<p:outputLabel value="Prix Journalier:" />
+				<p:inputText id="prix" required="true" value="#{gestionProduit.p_prix}" />
+
+				<p:outputLabel value="Caution:" />
+				<p:inputText id="caution" required="true" value="#{gestionProduit.p_caution}" />
+				
+				<p:outputLabel value="Amende journalière:" />
+				<p:inputText id="amende" required="true" value="#{gestionProduit.p_amende}" />
+				
+				<p:commandButton id="submit" value="Créer un nouveau produit" action="#{gestionProduit.addProduit}" />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</body>
+</html> 

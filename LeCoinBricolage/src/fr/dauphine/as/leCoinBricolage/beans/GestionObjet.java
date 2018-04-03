@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 
 @ManagedBean
 @SessionScoped
-public class GestionProduit implements Serializable {
+public class GestionObjet implements Serializable {
 	static final long serialVersionUID = 1L;
 	private static DataSource dataSource = null;
 	private final static String _SQL_SELECT_PRODUIT= "select * from coinbrico.produit";
@@ -32,10 +32,11 @@ public class GestionProduit implements Serializable {
 	
 	private final static String _SQL_SELECT_OBJETS ="select * from coinbrico.objet where id_produit=?";
 
-	private List<Produit> produit;
-	private Produit prod = null;
+	private List<Objet> objet;
+	private Objet o = null;
+	static Produit p;
 
-	public ArrayList<Produit> getProduit() {
+	/*public ArrayList<Produit> getProduit() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -78,13 +79,48 @@ public class GestionProduit implements Serializable {
 	public String editProduit(Produit p) {
 		this.prod = p;
 		return "edit";
-	}
+	}*/
 	
-	public String listObjets(Produit p) {
-		GestionObjet.setP(p);
-		return "obj";
+	public String listeObjets() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Objet o = null;
+		ArrayList<Objet> resultat = null;
+		try {
+			resultat = new ArrayList<Objet>();
+			connection = getDataSource().getConnection();
+			preparedStatement = connection
+					.prepareStatement(_SQL_SELECT_OBJETS);
+			preparedStatement.setInt(1, p.getId_produit());
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				o = new Objet();
+				o.setId_objet(resultSet.getString(1));
+				o.setO_libelle(resultSet.getString(4));
+				o.setId_pl(new Integer(resultSet.getString(2)).intValue());
+				o.setO_etat(resultSet.getString(9));
+				o.setO_prix(Float.parseFloat(resultSet.getString(5)));
+				o.setO_amende_dj(Float.parseFloat(resultSet.getString(6)));
+				o.setO_caution(Float.parseFloat(resultSet.getString(7)));
+				resultat.add(o);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage().toString());
+		} finally {
+			try {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (Exception e2) {
+				System.err.println(e2.getMessage().toString());
+			}
+		}
+		return "objProd";
 	}
 
+	/*
 	public String deleteProduit(Produit p){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -141,10 +177,7 @@ public class GestionProduit implements Serializable {
 		return "list";
 	}
 
-	/*private String getP_type() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+
 
 
 	public String addProduit() {
@@ -180,122 +213,85 @@ public class GestionProduit implements Serializable {
 		}
 		return "list";
 
+	}*/
+
+
+	public Objet getO() {
+		return o;
 	}
 
-	public String getResponse() {
-		String retour = null;
-
-		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("BricoTestWeb");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction et = em.getTransaction();
-		et.begin();
-		em.persist(getProduit());
-		et.commit();
-
-		setProduit(em.find(Produit.class, getId_produit()));
-
-		retour = "insertion ok";
-		return retour;
-	}
-	
-
-
-	public Produit getProd() {
-		return prod;
+	public void setObjet(Objet o) {
+		this.o = o;
 	}
 
-	public void setProduit(Produit p) {
-		this.prod = p;
-	}
-
-	public int getId_produit() {
-		if (this.prod == null) {
-			this.prod = new Produit();
+	public String getId_objet() {
+		if (this.o == null) {
+			this.o = new Objet();
 		}
-		return getProd().getId_produit();
+		return getO().getId_objet();
 	}
 
-	public void setId_produit(int id_produit) {
-		getProd().setId_produit(id_produit);
+	public void setId_objet(String id) {
+		getO().setId_objet(id);
 	}
 
-	public String getP_libelle() {
-		return getProd().getP_libelle();
+	public String getO_libelle() {
+		return getO().getO_libelle();
 	}
 		
-	public void setP_libelle(String libelle) {
-		getProd().setP_libelle(libelle);
+	public void setO_libelle(String libelle) {
+		getO().setO_libelle(libelle);
 	}
 	
-	public String getP_type() {
-		return getProd().getP_type();
+	public String getO_etat() {
+		return getO().getO_etat();
 	}
 		
-	public void setP_type(String type) {
-		getProd().setP_type(type);
-	}
-	public String getP_desc() {
-		return getProd().getP_desc();
-	}
-		
-	public void setP_desc(String description) {
-		getProd().setP_desc(description);
+	public void setO_etat(String etat) {
+		getO().setO_libelle(etat);
 	}
 	
-	public String getP_defaut() {
-		return getProd().getP_defaut();
+	
+	public int getO_pl() {
+		return getO().getId_pl();
 	}
 		
-	public void setP_defaut(String defauts) {
-		getProd().setP_defaut(defauts);
+	public void setO_pl(int id_pl) {
+		getO().setId_pl(id_pl);
 	}
-	public Float getP_prix() {
-		return getProd().getP_prix();
+	public Float getO_prix() {
+		return getO().getO_prix();
 	}
 		
-	public void setP_prix(Float prix) {
-		getProd().setP_prix(prix);
+	public void setO_prix(float prix) {
+		getO().setO_prix(prix);
 	}
 	
-	public Float getP_amende() {
-		return getProd().getP_amende();
+	public Float getO_amende() {
+		return getO().getO_amende_dj();
 	}
 		
-	public void setP_amende(Float amende) {
-		getProd().setP_amende(amende);
+	public void setO_amende(float amende) {
+		getO().setO_amende_dj(amende);
 	}
 	
-	public Float getP_caution() {
-		return getProd().getP_caution();
+	public Float getO_caution() {
+		return getO().getO_caution();
 	}
 		
-	public void setP_caution(Float caution) {
-		getProd().setP_caution(caution);
+	public void setO_caution(float caution) {
+		getO().setO_caution(caution);
 	}
-
-
-	public Date getP_Date() {
-		return getProd().getP_date_der_maj();
-	}
-	public String getStringP_Date() {
-		return getProd().getStringP_date_der_maj();
-	}
-
-	public void setP_date_der_maj(Date date_der_maj) {
-		getProd().setP_date_der_maj(date_der_maj);
-	}
-
-	public Integer getP_u_der_maj() {
-		return getProd().getP_u_der_maj();
-	}
-		
-	public void setP_u_der_maj(Integer utilId) {
-		getProd().setP_u_der_maj(utilId);
-	}
-
 	
-	public GestionProduit() {
+	public static Object getp() {
+		return p;
+	}
+
+	public static void setP(Produit p ) {
+		GestionObjet.p = p;
+	}
+
+	public GestionObjet() {
 	}
 	
 	private static java.sql.Date getCurrentDate() {

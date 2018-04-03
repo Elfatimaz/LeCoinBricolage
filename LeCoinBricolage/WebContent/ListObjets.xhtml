@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<title>La liste des ibjets</title>
+</h:head>
+<body>
+	<h:form>
+		<h:dataTable border="0" rules="all" value="#{gestionObjet.listObjets()}"
+			var="o">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:outputText value="#{o.id_objet}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Libellé du produit" />
+				</f:facet>
+				<h:outputText value="#{o.o_libelle}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Point de location" />
+				</f:facet>
+				<h:outputText value="#{o.id_pl}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="DEtat de l'objet" />
+				</f:facet>
+				<h:outputText value="#{o.o_etat}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Prix" />
+				</f:facet>
+				<h:outputText value="#{o.o_prix}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Amende" />
+				</f:facet>
+				<h:outputText value="#{o.o_amende}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Caution" />
+				</f:facet>
+				<h:outputText value="#{o.o_caution}"/>
+			</h:column>
+			
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Voir les objets associés" />
+				</f:facet>
+				
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+</body>
+</html>
